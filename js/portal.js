@@ -21,7 +21,7 @@
 (function () {
   "use strict";
 
-  var REPO = "Technovabb/sterling-funeral-services";
+  var REPO = "SterlingFuneralServices/sterling-funeral-services";
   var BRANCH = "main";
   var API = "https://api.github.com";
   var KEY_STORE = "sterling-portal-key";

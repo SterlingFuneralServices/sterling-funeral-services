@@ -98,11 +98,12 @@ to the latest data if someone else published at the same moment.
 **Access.** Each device needs a GitHub fine-grained personal access token,
 pasted into the portal once and kept in that browser only:
 
-1. Signed in to GitHub as **Technovabb** (the repository's owner — a token
-   made by a collaborator's own account cannot reach a repository owned by
-   another personal account): Settings → Developer settings → Personal access
+1. Signed in to GitHub as one of the owners of the **SterlingFuneralServices**
+   organization, which owns the repository (Sheradan's `sheradandl`, or Tech
+   Nova's `Technovabb`): Settings → Developer settings → Personal access
    tokens → **Fine-grained tokens** → Generate new token.
 2. Name it after the device ("Sheradan's phone"), expiry up to a year.
+   Resource owner: **SterlingFuneralServices**.
    Repository access: **Only select repositories** → `sterling-funeral-services`.
    Permissions → Repository permissions → **Contents: Read and write**
    (Metadata: Read is added automatically). Nothing else.
