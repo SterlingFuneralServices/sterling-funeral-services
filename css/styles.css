@@ -390,3 +390,8 @@ footer{background:var(--wine-deep);color:#bfaeb1;padding:75px max(5vw,calc((100v
 /* Photo panel between the two lists on the Funerals page */
 .services-feature{margin:0 0 90px}
 @media (max-width:900px){.services-feature{margin-bottom:60px}}
+
+/* Keep Shaquille's full portrait visible, including the top of his head. */
+.obituary-card-image[href="obituaries/shaquille-kode-teral-cumberbatch.html"] img{object-fit:contain;object-position:center top;transform:none}
+.obituary-card:hover .obituary-card-image[href="obituaries/shaquille-kode-teral-cumberbatch.html"] img{transform:none}
+.memorial-portrait img[src*="Shaquille%20Cumberbatch%20Cover%20photo.png"]{object-fit:contain;object-position:center top}
