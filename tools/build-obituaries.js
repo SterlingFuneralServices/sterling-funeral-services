@@ -68,9 +68,23 @@ function initials(name) {
 }
 
 // Portraits keep whatever format they arrived in, so try each in turn.
-function photoFor(slug) {
+function photoFor(person) {
+  // The upload portal can preserve the family's original filename. Prefer the
+  // explicit image path recorded in obituaries.json over the slug convention.
+  if (person.image) {
+    const prefix = "/images/obituaries/";
+    const value = String(person.image);
+    if (value.startsWith(prefix)) {
+      const filename = value.slice(prefix.length);
+      if (filename && path.basename(filename) === filename &&
+          fs.existsSync(path.join(root, "images/obituaries", filename))) {
+        return encodeURIComponent(filename);
+      }
+    }
+  }
   for (const ext of [".jpg", ".png", ".webp"]) {
-    if (fs.existsSync(path.join(root, "images/obituaries", slug + ext))) return slug + ext;
+    const filename = person.slug + ext;
+    if (fs.existsSync(path.join(root, "images/obituaries", filename))) return encodeURIComponent(filename);
   }
   return null;
 }
@@ -220,7 +234,7 @@ ${list}
 }
 
 function memorialPage(p) {
-  const photo = photoFor(p.slug);
+  const photo = photoFor(p);
   const { first, rest } = splitName(p.name);
   const desc = `${p.name}${p.aka ? `, affectionately known as ${p.aka}` : ""} — service and interment details published by Sterling Funeral Services.`;
 
@@ -340,7 +354,7 @@ function servicesPage() {
 
   const row = (x) => {
     const p = x.p;
-    const photo = photoFor(p.slug);
+    const photo = photoFor(p);
     return `<article class="service-row">
 <a class="service-face" href="obituaries/${p.slug}.html" aria-label="View the obituary for ${esc(p.name)}">${
       photo
@@ -441,7 +455,7 @@ function blurb(p) {
 }
 
 function card(p) {
-  const photo = photoFor(p.slug);
+  const photo = photoFor(p);
   const href = `obituaries/${p.slug}.html`;
   const dates =
     [p.age ? `Aged ${p.age}` : null, p.diedText ? `Entered rest ${p.diedText}` : null]
@@ -731,7 +745,7 @@ for (const p of people) {
   }
 }
 
-const missing = people.filter((p) => !photoFor(p.slug));
+const missing = people.filter((p) => !photoFor(p));
 console.log(`Wrote ${written} memorial pages and rebuilt the index.`);
 console.log(`Notice photographs present: ${people.length - missing.length}/${people.length}`);
 if (missing.length) {
