@@ -463,7 +463,7 @@ function card(p) {
       .join(" &middot; ") || `Service held ${txt(p.service)}`;
 
   const image = photo
-    ? `<a class="obituary-card-image" href="${href}" aria-label="View the obituary for ${esc(p.name)}"><img src="images/obituaries/${photo}" alt="Obituary notice for ${esc(p.name)}" loading="lazy" /></a>`
+    ? `<a class="obituary-card-image" href="${href}" aria-label="View the obituary for ${esc(p.name)}"><img src="images/obituaries/${photo}" alt="Obituary notice for ${esc(p.name)}" loading="lazy"${p.slug === "shaquille-kode-teral-cumberbatch" ? ' style="object-fit:contain;object-position:center top;transform:none"' : ""} /></a>`
     : `<a class="obituary-card-image is-placeholder" href="${href}" aria-label="View the obituary for ${esc(p.name)}"><span class="monogram">${esc(initials(p.name))}</span></a>`;
 
   return `<article class="obituary-card">
